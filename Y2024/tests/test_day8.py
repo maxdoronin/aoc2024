@@ -17,20 +17,7 @@ class TestDayXSolver(unittest.TestCase):
             "............",
             "............"
         ]
-        self.test_input2 = [
-            "T...........",
-            "...T....0...",
-            ".T...0......",
-            ".......0....",
-            "....0.......",
-            "......A.....",
-            "............",
-            "............",
-            "........A...",
-            ".........A..",
-            "............",
-            "............"
-        ]
+
     def test_first_problem(self):
         solver = DayXSolver(None, None, None, self.test_input1)
         self.assertEqual(solver.first_problem(), 14)
