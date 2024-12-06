@@ -1,5 +1,4 @@
 from Solver import Solver
-import copy
 
 class DayXSolver(Solver):
     def __init__(self, request, year, day, input=None):
