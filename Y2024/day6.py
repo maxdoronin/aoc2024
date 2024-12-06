@@ -1,5 +1,4 @@
 from Solver import Solver
-import copy
 
 class DayXSolver(Solver):
     def __init__(self, request, year, day, input=None):
@@ -57,7 +56,7 @@ class DayXSolver(Solver):
         while self.is_in_bounds(r, c):
             r1, c1 = self.step(r, c, dir)
             if self.is_in_bounds(r1, c1) and map[r1][c1] == "." and (r1, c1) not in result:
-                t_map = copy.deepcopy(self.input)
+                t_map = self.input.copy()
                 self.set_map(r1, c1, "#", t_map)
                 if (r1, c1) != (self.start_r, self.start_c):
                     if self.go1(r, c, (dir + 1) % 4, t_map) == -1:
@@ -72,12 +71,12 @@ class DayXSolver(Solver):
         return result    
                             
     def first_problem(self):
-        input_copy = copy.deepcopy(self.input)
+        input_copy = self.input.copy()
         result = self.go1(self.start_r, self.start_c, self.start_dir, input_copy)
         return result
 
     def second_problem(self):
-        input_copy = copy.deepcopy(self.input)
+        input_copy = self.input.copy()
         result = self.go2(self.start_r, self.start_c, self.start_dir, input_copy)
         return len(result)
 
