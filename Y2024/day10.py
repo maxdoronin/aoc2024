@@ -8,6 +8,7 @@ class DayXSolver(Solver):
             self.data.append(line)
         self.h = len(self.data)
         self.w = len(self.data[0])
+        self.memory = {}
 
 
     def next_start(self, r, c):
@@ -38,7 +39,9 @@ class DayXSolver(Solver):
                 if self.data[nr][nc] == "9":
                     result += 1
                 else:
-                    result += self.dfs2(nr, nc)
+                    if (nr, nc) not in self.memory:
+                        self.memory[(nr, nc)] = self.dfs2(nr, nc)
+                    result += self.memory[(nr, nc)]
         return result
     
     def first_problem(self):
