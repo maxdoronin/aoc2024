@@ -23,28 +23,36 @@ class TestDayXSolver(unittest.TestCase):
 
     def test_first_problem(self):
         solver = DayXSolver(None, None, None, self.test_input1)
-        self.assertEqual(len(solver.dfs1(0, 2, set())), 5)
-        self.assertEqual(len(solver.dfs1(0, 4, set())), 6)
-        self.assertEqual(len(solver.dfs1(2, 4, set())), 5)
-        self.assertEqual(len(solver.dfs1(4, 6, set())), 3)
-        self.assertEqual(len(solver.dfs1(5, 2, set())), 1)
-        self.assertEqual(len(solver.dfs1(5, 5, set())), 3)
-        self.assertEqual(len(solver.dfs1(6, 0, set())), 5)
-        self.assertEqual(len(solver.dfs1(6, 6, set())), 3)
-        self.assertEqual(len(solver.dfs1(7, 1, set())), 5)
+        test_paths = {
+            (0, 2): 5,
+            (0, 4): 6,
+            (2, 4): 5,
+            (4, 6): 3,
+            (5, 2): 1,
+            (5, 5): 3,
+            (6, 0): 5,
+            (6, 6): 3,
+            (7, 1): 5
+        }
+        for start, expected in test_paths.items():
+            self.assertEqual(len(solver.dfs1(*start, set())), expected)
         self.assertEqual(solver.first_problem(), 36)
 
     def test_second_problem(self):
         solver = DayXSolver(None, None, None, self.test_input1)
-        self.assertEqual(solver.dfs2(0, 2), 20)
-        self.assertEqual(solver.dfs2(0, 4), 24)
-        self.assertEqual(solver.dfs2(2, 4), 10)
-        self.assertEqual(solver.dfs2(4, 6), 4)
-        self.assertEqual(solver.dfs2(5, 2), 1)
-        self.assertEqual(solver.dfs2(5, 5), 4)
-        self.assertEqual(solver.dfs2(6, 0), 5)
-        self.assertEqual(solver.dfs2(6, 6), 8)
-        self.assertEqual(solver.dfs2(7, 1), 5)
+        test_paths = {
+            (0, 2): 20,
+            (0, 4): 24,
+            (2, 4): 10,
+            (4, 6): 4,
+            (5, 2): 1,
+            (5, 5): 4,
+            (6, 0): 5,
+            (6, 6): 8,
+            (7, 1): 5
+        }
+        for start, expected in test_paths.items():
+            self.assertEqual(solver.dfs2(*start), expected)
         self.assertEqual(solver.second_problem(), 81)
 if __name__ == '__main__':
     unittest.main()
