@@ -6,7 +6,6 @@ class DayXSolver(Solver):
         self.rows = rows
         self.cols = cols
         self.data = []
-        self.final_positions = {0: [], 1: [], 2: [], 3: []}
         for l in self.input:
             p = l.split(" v=")[0].split("p=")[1].split(",")
             v = l.split(" v=")[1].split(",")
@@ -32,37 +31,39 @@ class DayXSolver(Solver):
                     q2 += 1
                 elif c > self.cols // 2:
                     q3 += 1
-
         return q0 * q1 * q2 * q3
-            
+
     def second_problem(self):
-        result = 0
-        while result < 10000:
-            final_positions = {}
+        result = [len(self.data), 0]
+        time = 0
+        while time < self.rows * self.cols:
+        # while result < 3:
+            folded_positions = {}
+            robots = set()
             for robot in self.data:
                 vr = robot["v"]["r"]
-                posr = vr * result
-                r = (robot["p"]["r"] + posr) % self.rows
+                deltar = vr * time
+                r = (robot["p"]["r"] + deltar) % self.rows
                 vc = robot["v"]["c"]
-                posc = vc * result
-                c = (robot["p"]["c"] + posc) % self.cols
+                deltac = vc * time
+                c = (robot["p"]["c"] + deltac) % self.cols
+                robots.add((r, c))
                 
-                l = final_positions.get(r, {})
-                if c <= self.cols // 2:
+                l = folded_positions.get(r, {})
+                if c < self.cols // 2:
                     l[c] = l.get(c, 0) + 1
-                    final_positions[r] = l
-                elif c > self.cols // 2 + 1:
-                    l[c] = l.get(c, 0) - 1
-                    final_positions[r] = l
-            result += 1
+                    folded_positions[r] = l
+                elif c > self.cols // 2:
+                    l[c] = l.get(self.cols - c  - 1, 0) - 1
+                    folded_positions[r] = l
+            
             symmetry = 0
-            for l in final_positions.values():
-                symmetry += sum([abs(x) for x in l])
-            # print (final_positions)
-            if symmetry < 20000:
-                print (symmetry)
-
-        return result
+            for l in folded_positions.values():
+                symmetry += sum([abs(x) for x in l.values()])
+            if symmetry < result[0]:
+                result = [symmetry, time]
+            time += 1
+        return result[1]
              
 def process(request, year, day):
     solver = DayXSolver(request, year, day)

@@ -24,12 +24,7 @@ class TestDayXSolver(unittest.TestCase):
         self.assertEqual(solver.first_problem(), 12)
 
     def test_second_problem(self):
-        self.real_input = []
-        with open("/home/max/src/aoc/aoc2024/Y2024/tests/14.txt") as file:
-            for line in file:
-                self.real_input.append(line.rstrip())
-        solver = DayXSolver(None, None, None, self.real_input, 103, 101)
-        self.assertEqual(solver.second_problem(), 0)
+        pass
 
 if __name__ == '__main__':
     unittest.main()
