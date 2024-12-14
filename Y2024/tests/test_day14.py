@@ -24,7 +24,8 @@ class TestDayXSolver(unittest.TestCase):
         self.assertEqual(solver.first_problem(), 12)
 
     def test_second_problem(self):
-        pass
+        solver = DayXSolver(None, None, None, self.test_input1, 7, 11)
+        self.assertEqual(solver.second_problem(), 31) # It doesn't find the Christmas tree in the test input, just the max-symmetry point
 
 if __name__ == '__main__':
     unittest.main()
