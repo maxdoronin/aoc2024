@@ -88,7 +88,6 @@ class DayXSolver(Solver):
                     max_match = current_match_len
                     max_match_i = i
                     max_match_output = output
-                    print (i, match_length(output, self.prog), output, self.prog)
             return max_match_i, max_match_output
     
         i = 1
@@ -108,7 +107,6 @@ class DayXSolver(Solver):
                 break
             i += 1
         iend = i
-        print (istart, iend)
 
         start = 2 ** istart
         end = 2 ** iend
@@ -123,7 +121,6 @@ class DayXSolver(Solver):
             if step == 0:
                 step = 1
             i, output = search_range(start, end, step)
-        print (i, output)
         return i
              
 def process(request, year, day):
