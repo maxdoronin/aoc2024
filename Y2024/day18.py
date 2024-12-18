@@ -12,7 +12,7 @@ class DayXSolver(Solver):
         self.cols = kwargs.get("cols", 71)
         self.byte_count = kwargs.get("byte_count", 1024)
 
-    def dfs(self, r, c, bad_bytes, visited):
+    def bfs(self, r, c, bad_bytes, visited):
         queue = [((r, c), 0)]
 
         while queue:
@@ -43,7 +43,7 @@ class DayXSolver(Solver):
     def first_problem(self):
         self.visited = {}
         bad_bytes = self.data[0:self.byte_count]
-        self.dfs(self.rows - 1, self.cols - 1, bad_bytes, self.visited)
+        self.bfs(self.rows - 1, self.cols - 1, bad_bytes, self.visited)
         return self.visited[(0, 0)]
 
     def second_problem(self):
@@ -52,7 +52,7 @@ class DayXSolver(Solver):
         while (0, 0) not in self.visited:
             self.visited = {}
             bad_bytes = self.data[0:baddest_byte_no]
-            self.dfs(self.rows - 1, self.cols - 1, bad_bytes, self.visited)
+            self.bfs(self.rows - 1, self.cols - 1, bad_bytes, self.visited)
             baddest_byte_no -= 1
         return (self.data[baddest_byte_no + 1][1], self.data[baddest_byte_no + 1][0])
              
