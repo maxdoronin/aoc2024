@@ -13,10 +13,10 @@ class DayXSolver(Solver):
         self.byte_count = kwargs.get("byte_count", 1024)
 
     def dfs(self, r, c, bad_bytes, visited):
-        stack = [((r, c), 0)]
+        queue = [((r, c), 0)]
 
-        while stack:
-            (r, c), time = stack.pop()
+        while queue:
+            (r, c), time = queue.pop(0)
 
             if not (0 <= r < self.rows and 0 <= c < self.cols):
                 continue
@@ -27,7 +27,7 @@ class DayXSolver(Solver):
             visited[(r, c)] = time
 
             for dr, dc in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
-                stack.append(((r + dr, c + dc), time + 1))
+                queue.append(((r + dr, c + dc), time + 1))
         return
 
     def draw(self, visited):
