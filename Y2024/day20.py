@@ -31,7 +31,7 @@ class DayXSolver(Solver):
         cheats = {}
         for (r, c), time in visited.items():
             for dr in range(-1 * max_cheat_len, max_cheat_len + 1):
-                for dc in range(-1 * max_cheat_len, max_cheat_len + 1):
+                for dc in range(-1 * (max_cheat_len - abs(dr)), max_cheat_len - abs(dr) + 1):
                     r1, c1 = r + dr, c + dc
                     distance = abs(dr) + abs(dc)
                     if (distance > max_cheat_len or
