@@ -42,7 +42,19 @@ class DayXSolver(Solver):
                     if cut_time > 0:
                         cheats[((r, c), (r1, c1))] = cut_time
         return cheats
-                       
+
+    def find_cheats2(self, visited, max_cheat_len):
+        cheats = {}
+        for i, (r, c) in enumerate(visited.keys()):
+            for (r1, c1) in list(visited.keys())[i:]:
+                distance = abs(r1 - r) + abs(c1 - c)
+                if distance > max_cheat_len or distance <= 1:
+                    continue
+                cut_time = visited[(r1, c1)] - visited[(r, c)] - distance
+                if cut_time > 0:
+                    cheats[((r, c), (r1, c1))] = cut_time
+        return cheats
+      
     def first_problem(self):
         visited = {}
         self.chart_track(self.sr, self.sc, visited)
